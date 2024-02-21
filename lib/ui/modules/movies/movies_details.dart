@@ -1,4 +1,6 @@
-import 'package:disposable_cached_images/disposable_cached_images.dart';
+// import 'package:disposable_cached_images/disposable_cached_images.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movies/core/modules/movie/movie.dart';
 import 'package:flutter_movies/ui/modules/movies/controller.dart';
@@ -49,18 +51,34 @@ class _MovieDetailsState extends ConsumerState<MovieDetails> {
                 top: 130,
                 child: Center(
                   child: SizedBox(
-                    height: size.height * 0.35,
-                    width: size.width * 0.5,
-                    child: DisposableCachedImage.network(
-                      imageUrl:
-                          'https://image.tmdb.org/t/p/original/${isOnline ? widget.movie?.posterPath : widget.movie?.backdropPath}',
-                      fit: BoxFit.cover,
-                      onLoading: (context, height, width) =>
-                          const CustomLoadingBox(height: 0.35, width: 0.5),
-                      borderRadius: BorderRadius.circular(10),
-                      fadeDuration: const Duration(milliseconds: 0),
-                    ),
-                  ),
+                      height: size.height * 0.35,
+                      width: size.width * 0.5,
+                      child: FastCachedImage(
+                        url:
+                            'https://image.tmdb.org/t/p/original/${isOnline ? widget.movie?.posterPath : widget.movie?.backdropPath}',
+                        loadingBuilder: (p0, p1) =>
+                            const CustomLoadingBox(height: 0.22, width: 0.34),
+                        fit: BoxFit.cover,
+                      )
+
+                      // CachedNetworkImage(
+                      //   fit: BoxFit.cover,
+                      //   imageUrl:
+                      //       'https://image.tmdb.org/t/p/original/${isOnline ? widget.movie?.posterPath : widget.movie?.backdropPath}',
+                      //   placeholder: (context, url) =>
+                      //       const CustomLoadingBox(height: 0.22, width: 0.34),
+                      // ),
+
+                      // DisposableCachedImage.network(
+                      //   imageUrl:
+                      //       'https://image.tmdb.org/t/p/original/${isOnline ? widget.movie?.posterPath : widget.movie?.backdropPath}',
+                      //   fit: BoxFit.cover,
+                      //   onLoading: (context, height, width) =>
+                      //       const CustomLoadingBox(height: 0.35, width: 0.5),
+                      //   borderRadius: BorderRadius.circular(10),
+                      //   fadeDuration: const Duration(milliseconds: 0),
+                      // ),
+                      ),
                 ),
               ),
             ],

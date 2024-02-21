@@ -1,8 +1,10 @@
+// import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movies/ui/modules/movies/movies_details.dart';
 import 'package:intl/intl.dart';
-import 'package:disposable_cached_images/disposable_cached_images.dart';
+// import 'package:disposable_cached_images/disposable_cached_images.dart';
 import 'package:flutter_movies/core/modules/movie/movie.dart';
 import 'package:flutter_movies/ui/utils/utils.dart';
 
@@ -28,17 +30,45 @@ class MovieItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            DisposableCachedImage.network(
-              height: size.height * 0.22,
-              width: size.width * 0.34,
-              imageUrl: movie?.backdropPath != null
-                  ? 'https://image.tmdb.org/t/p/original/${movie?.backdropPath}'
-                  : loadImage,
-              onLoading: (context, height, width) =>
-                  const CustomLoadingBox(height: 0.22, width: 0.34),
-              fit: BoxFit.cover,
+            // DisposableCachedImage.network(
+            //   height: size.height * 0.22,
+            //   width: size.width * 0.34,
+            //   imageUrl: movie?.backdropPath != null
+            //       ? 'https://image.tmdb.org/t/p/original/${movie?.backdropPath}'
+            //       : loadImage,
+            //   onLoading: (context, height, width) =>
+            //       const CustomLoadingBox(height: 0.22, width: 0.34),
+            //   fit: BoxFit.cover,
+            //   borderRadius: BorderRadius.circular(10),
+            //   fadeDuration: const Duration(milliseconds: 0),
+            // ),
+            // ClipRRect(
+            //   borderRadius: BorderRadius.circular(10),
+            //   child: CachedNetworkImage(
+
+            //     imageUrl: movie?.backdropPath != null
+            //         ? 'https://image.tmdb.org/t/p/original/${movie?.backdropPath}'
+            //         : loadImage,
+            //     fit: BoxFit.cover,
+            //     height: size.height * 0.22,
+            //     width: size.width * 0.34,
+            //     placeholder: (context, url) =>
+            //         const CustomLoadingBox(height: 0.22, width: 0.34),
+            //   ),
+            // ),
+            ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              fadeDuration: const Duration(milliseconds: 0),
+              child: FastCachedImage(
+                fadeInDuration: Duration(milliseconds: 0),
+                height: size.height * 0.22,
+                width: size.width * 0.34,
+                fit: BoxFit.cover,
+                url: movie?.backdropPath != null
+                    ? 'https://image.tmdb.org/t/p/original/${movie?.backdropPath}'
+                    : loadImage,
+                loadingBuilder: (context, progressData) =>
+                    const CustomLoadingBox(height: 0.22, width: 0.34),
+              ),
             ),
             const SizedBox(height: 5),
             Expanded(

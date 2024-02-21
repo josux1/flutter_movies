@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:disposable_cached_images/disposable_cached_images.dart';
+// import 'package:disposable_cached_images/disposable_cached_images.dart';
 import 'package:flutter_movies/core/services/assets/assets.dart';
 import 'package:flutter_movies/core/services/theme/theme.dart';
 import 'package:flutter_movies/ui/modules/movies/controller.dart';
@@ -52,7 +52,7 @@ class ProfilePage extends ConsumerWidget {
           ),
           ListTile(
             onTap: () {
-              DisposableImages.decodedImages.disposeAll();
+              // DisposableImages.decodedImages.disposeAll();
               ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Images Deleted')));
             },
